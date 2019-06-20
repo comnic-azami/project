@@ -9,9 +9,7 @@
 -->
 
 <link href="http://calil.jp/public/css/calilapi.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://calil.jp/public/js/calilapi.js">	
-</script>
+
 
 	<title>APIテスト</title>
 
@@ -24,8 +22,8 @@
 	<!-- 市町村選択 -->
 	<div id="pref" >
 		選択された市町村:
-		<strong id="pref_name">東京都世田谷区</strong>
-		<span id="lib_select" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館を変更する</a>)</span>
+		<strong id="pref_name">茨城県取手市</strong>
+		<span id="lib_select" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">市町村から選ぶ</a>)</span>
 	</div>
 
 	<!-- ISBNリスト -->
@@ -39,15 +37,14 @@
 	<!-- 結果の表示 -->
 	<div id="calil_booklist" class="clearfix">
 	</div>
-
-
 </div>
 
-
-
-	<script type="text/javascript">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://calil.jp/public/js/calilapi.js">	
+</script>
+<script type="text/javascript">
 	//デフォルトの図書館ID(sysytemid)
-	var systemid_list = ['Tokyo_Setagaya'];
+	var systemid_list = ['Ibaraki_Toride'];
 	//市町村選択時に実行される関数
 	function on_select_city(systemid, pref){
 		systemid_list = systemid;
@@ -80,7 +77,7 @@
 		});
 		//検索表示用のインスタンス作成
 		var calil = new Calil({
-			'appkey' : '1f797b9d960207280336610120edb44a',
+			'appkey' : '2bc265ea827cb23b11d1ee80a25ef575',
 			'render': new CalilRender(),
 			'isbn' : isbn_list,
 			'systemid' : systemid_list
@@ -95,6 +92,10 @@
 		}catch( e ){}
 	}
 </script>
+
+
+
+
 
 </body>
 
