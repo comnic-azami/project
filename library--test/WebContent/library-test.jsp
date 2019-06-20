@@ -44,7 +44,7 @@
 </script>
 <script type="text/javascript">
 	//デフォルトの図書館ID(sysytemid)
-	var systemid_list = ['Ibaraki_Toride'];
+	var systemid_list = ['Tokyo_Setagaya'];
 	//市町村選択時に実行される関数
 	function on_select_city(systemid, pref){
 		systemid_list = systemid;
@@ -58,7 +58,7 @@
 	$(function(){
 		//市町村選択ダイアログ
 		city_selector = new CalilCitySelectDlg({
-			'appkey' : '2bc265ea827cb23b11d1ee80a25ef575',
+			'appkey' : 'YOUR_API_KEY',
 			'select_func' : on_select_city
 		});
 		apishow();
