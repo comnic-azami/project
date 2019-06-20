@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html ng-app="myapp">
 <head>
@@ -55,6 +56,38 @@
       border: 1px solid #999;
       background: #fff;
     }
+
+    #right-panel {
+      font-family: 'Roboto','sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+
+    #right-panel select, #left-panel input {
+      font-size: 15px;
+    }
+
+    #right-panel select {
+      width: 100%;
+    }
+
+    #right-panel i {
+      font-size: 12px;
+    }
+    #right-panel {
+      font-family: Arial, Helvetica, sans-serif;
+      position: absolute;
+      right: 25px;
+      top: 60%;
+      margin-top: -195px;
+      height: 330px;
+      width: 200px;
+      padding: 5px;
+      z-index: 8;
+      border: 1px solid #999;
+      background: #fff;
+    }
+
     html, body {
       height: 100%;
       margin: 0;
@@ -90,6 +123,10 @@
       width: 100%;
       margin: 5px 0 0 0;
     }
+    #morebook {
+      width: 100%;
+      margin: 5px 0 0 0;
+    }
     .wrap
     {
       width: 800px;
@@ -119,32 +156,38 @@
   <div id="left-panel">
     <h2>近くの図書館</h2>
     <ul id="places"></ul>
-    <button id="more">More results</button>
+    <button id="more">さらに見る</button>
+  </div>
+  <!-- 図書館の所蔵の表示 -->
+  <div id="right-panel">
+    <h2>図書館の所蔵</h2>
+    <ul id="book"></ul>
+    <button id="morebook">さらに見る</button>
   </div>
   <!-- 郵便番号で住所検索 -->
-    <div class="wrap">
+  <div class="wrap">
     <div class="form-inline">
       <span class="help-block" style="display: block;">郵便番号を入力してください。</span>
       <p>
-      <input type="text" class="form-control" placeholder="例: 1000014" ng-model="code" ng-change="input()"> 
+        <input type="text" class="form-control" placeholder="例: 1000014" ng-model="code" ng-change="input()"> 
       </p>
       <button ng-click="click()" class="btn btn-primary">郵便番号で住所を確認</button>
     </div>
     <div ng-if="data.error" class="alert alert-danger">住所が見つかりませんでした。</div>
     <div ng-repeat="address in data.addresses">
-    <div class="content">
-      <label>都道府県</label>
-      <span class="content_form">
-       {{ address.ja.prefecture }}
-      </span>
-    </div>
-    <div class="content">
+      <div class="content">
+        <label>都道府県</label>
+        <span class="content_form">
+         {{ address.ja.prefecture }}
+       </span>
+     </div>
+     <div class="content">
       <label>市区町村</label>
       <span class="content_form">
         {{ address.ja.address1 }}
       </span>
     </div>
-    </div>
+  </div>
   <script>
     var map;
     // 住所検索機能
@@ -155,6 +198,17 @@
         center: pyrmont,
       });
       var geocoder = new google.maps.Geocoder();
+
+
+// 　　　　// リセット機能
+//  　　　var reset = document.getElementById('submit');
+
+//  　　　　reset.addEventListener("click", function(){
+//   　　　　 document.places.reset()
+//  　　　　}, false); 
+
+
+
 
       document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
@@ -198,7 +252,7 @@
 
 
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        alert('郵便番号あるいは住所が正しくありません。再度確認してください');
       }
     　　　});
     　}
@@ -235,51 +289,51 @@
   map.fitBounds(bounds);
 }
 </script>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-      <script type="text/javascript">
-      angular.module('myapp', [])
-      .service('getAddress', ['$http', function ($http) {
-        this.getdata = function (url, callback) {
-          $http({
-            url: url,
-            method: 'GET'
-          })
-          .success(function (data, status, headers, config) {
-            callback(data);
-          })
-          .error(function () {
-            callback({error: true});
-          })
-        };
-      }])
-      .controller('app', ['$scope', 'getAddress', function ($scope, getAddress) {
-        $scope.input = function() {
-          if ($scope.code && $scope.code.match(/^[0-9]{3}\-?[0-9]{4}$/)) {
-            angular.element(document).find('button').attr('disabled', false);
-          } else {
-            angular.element(document).find('button').attr('disabled', true);
-          }
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script type="text/javascript">
+  angular.module('myapp', [])
+  .service('getAddress', ['$http', function ($http) {
+    this.getdata = function (url, callback) {
+      $http({
+        url: url,
+        method: 'GET'
+      })
+      .success(function (data, status, headers, config) {
+        callback(data);
+      })
+      .error(function () {
+        callback({error: true});
+      })
+    };
+  }])
+  .controller('app', ['$scope', 'getAddress', function ($scope, getAddress) {
+    $scope.input = function() {
+      if ($scope.code && $scope.code.match(/^[0-9]{3}\-?[0-9]{4}$/)) {
+        angular.element(document).find('button').attr('disabled', false);
+      } else {
+        angular.element(document).find('button').attr('disabled', true);
+      }
+    }
+    $scope.click = function () {
+      if ( ! $scope.code || ! $scope.code.match( /^[0-9]{3}\-?[0-9]{4}$/ ) ) {
+        return;
+      }
+      var endpoint = 'https://madefor.github.io/postal-code-api/api/v1';
+      var code1 = $scope.code.replace(/^([0-9]{3}).*/, "$1");
+      var code2 = $scope.code.replace(/.*([0-9]{4})$/, "$1");
+      $scope.data = {};
+      $scope.data.url = endpoint + '/' + code1 +'/' + code2 + '.json';
+      getAddress.getdata($scope.data.url, function (res) {
+        if (res.error) {
+          $scope.data.error = true;
+        } else {
+          $scope.data.json = json = JSON.stringify( res, null, "    " );
+          $scope.data.addresses = res.data;
         }
-        $scope.click = function () {
-          if ( ! $scope.code || ! $scope.code.match( /^[0-9]{3}\-?[0-9]{4}$/ ) ) {
-            return;
-          }
-          var endpoint = 'https://madefor.github.io/postal-code-api/api/v1';
-          var code1 = $scope.code.replace(/^([0-9]{3}).*/, "$1");
-          var code2 = $scope.code.replace(/.*([0-9]{4})$/, "$1");
-          $scope.data = {};
-          $scope.data.url = endpoint + '/' + code1 +'/' + code2 + '.json';
-          getAddress.getdata($scope.data.url, function (res) {
-            if (res.error) {
-              $scope.data.error = true;
-            } else {
-              $scope.data.json = json = JSON.stringify( res, null, "    " );
-              $scope.data.addresses = res.data;
-            }
-          });
-        }
-      }]);
-      </script>
+      });
+    }
+  }]);
+</script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
 </script>

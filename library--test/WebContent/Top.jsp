@@ -11,17 +11,20 @@
 <link href="http://calil.jp/public/css/calilapi.css" rel="stylesheet" type="text/css" />
 
 
-	<title>APIテスト</title>
+	<title>library_test</title>
 
 </head>
 <body>
+<div id ="title">
+<h1>図書検索へようこそ!</h1>
+</div>
 
-<h1>カーリルAPI サンプル</h1>
+
 <div id="content">
 
 	<!-- 市町村選択 -->
 	<div id="pref" >
-		選択された市町村:
+		登録している図書館の市町村:
 		<strong id="pref_name">茨城県取手市</strong>
 		<span id="lib_select" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">市町村から選ぶ</a>)</span>
 	</div>
