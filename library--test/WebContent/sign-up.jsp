@@ -25,7 +25,6 @@
 						<div id="change_lib" >
 							登録する図書館の市町村:<h2><strong id="pref_name"> </strong></h2>
 							<strong id="test_name">
-							<br>
 							
 							<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 						</div>
