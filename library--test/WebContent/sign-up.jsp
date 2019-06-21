@@ -67,10 +67,10 @@
 			//市町村選択時に実行される関数
 			function on_select_city(systemid, pref){
 				systemid_list = systemid;
-				
+				const system_id=systemid_list[0]
 				//選択市町村の表示
 				console.log(systemid_list);
-				$('#test_name').html(systemid);
+				$('#test_name').html(system_id);
 				$('#pref_name').html(pref);
 				
 			}
@@ -84,7 +84,6 @@
 				
 			});
 			
-			//デバッグ用関数
 			
 		</script>
 		

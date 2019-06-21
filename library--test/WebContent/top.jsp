@@ -42,7 +42,7 @@ ${account.userName} <p>さん</p></h2>
 	<h4>あなたのisbn list:</h4>
 	<!-- ここでデータベースから本のリストを持ってくる -->
 	<select name="" id="isbn_list" size=2>
-		<option value="9784403671586" selected>9784403671586</option>
+		<option value="9784403671586,9784065102497,99784088725093" selected>9784403671586,9784065102497,9784088725093</option>
 	</select>
 　　　<!-- ここまでデータベースから本のリストを持ってくる -->
 
@@ -101,11 +101,7 @@ ${account.userName} <p>さん</p></h2>
 		calil.search();
 	}
 	//デバッグ用関数
-	function log(text){
-		try{
-			console.log(text);
-		}catch( e ){}
-	}
+	
 </script>
 
 
