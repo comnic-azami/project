@@ -27,7 +27,7 @@ ${account.userName} <p>さん</p></h2>
 	<div id="library" >
 		<h2>選択している図書館: <strong id="pref_name"></strong></h2>
 		<br>
-		市町村から図書館を選択:		
+		別の市町村から図書館を選択:		
 		<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 	</div>
 	
@@ -81,7 +81,7 @@ ${account.userName} <p>さん</p></h2>
 	//市町村選択時に実行される関数
 	function on_select_city(systemid, pref){
 		systemid_list = systemid;
-		log(systemid_list);
+		
 		//選択市町村の表示
 		$('#pref').show();
 		$('#pref_name').html(pref);
