@@ -23,9 +23,10 @@
 				<form class="col s12" action="sign-up.do" method="post">
 				   	<div class="row">
 						<div id="change_lib" >
-							登録する図書館の市町村:<h2><strong id="pref_name"> </strong></h2>
-							<strong id="test_name">
-							
+							<h2>登録する図書館の市町村:<strong id="pref_name"> </strong></h2>
+							<h4>図書館システムID:<strong id="test_name">
+						</div>
+						<div id = system-id>
 							<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 						</div>
 					</div>
