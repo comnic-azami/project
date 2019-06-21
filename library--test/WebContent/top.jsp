@@ -24,22 +24,41 @@ ${account.userName} <p>さん</p></h2>
 <div id="content">
 
 	<!-- 選択 -->
-	<div id="pref" >
-		登録している図書館: <h2><strong id="pref_name"> ${library.place}</strong></h2>
+	<div id="library" >
+		<h2>選択している図書館: <strong id="pref_name"></strong></h2>
 		<br>
-		市町村から図書館を選択:
-		
+		市町村から図書館を選択:		
 		<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 	</div>
 	
 	<div id="change_lib" >
-		登録している図書館の市町村:
+		登録している図書館の市町村の変更:
 		<strong id="registration_library"> ${library.place}</strong>
 		<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 	</div>
 
 	<!-- ISBNリスト -->
-	<h4>あなたのisbn list:</h4>
+	<h4>あなたのBook List:</h4>
+	<div id = booklist>
+		<table class="highlight responsive-table">
+				<tr>
+					<th></th>
+					<th>ISBN</th>
+					<th>TITLE</th>
+					<th>AUTHOR</th>
+				</tr>
+				<c:forEach var="book" items="${bookList}">
+					<tr>
+						<td><img src="img/${book.isbn}.webp" width="65px" height="15%"></td>
+						<td>${book.isbn}</td>
+						<td>${book.title}</td>
+						<td>${book.author.name}</td>
+						<td><fmt:formatNumber value="${book.price}" type="CURRENCY" currencyCode="USD" /></td>
+					</tr>
+				</c:forEach>
+		</table>
+	</div>
+	
 	<!-- ここでデータベースから本のリストを持ってくる -->
 	<select name="" id="isbn_list" size=2>
 		<option value="9784403671586,9784065102497,99784088725093" selected>9784403671586,9784065102497,9784088725093</option>
@@ -100,7 +119,7 @@ ${account.userName} <p>さん</p></h2>
 		//検索結果の表示 結果は↑で生成した<div id="isbn"></div>に描画されます
 		calil.search();
 	}
-	//デバッグ用関数
+	
 	
 </script>
 
