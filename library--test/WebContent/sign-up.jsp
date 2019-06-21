@@ -9,8 +9,7 @@
 		<meta charset="UTF-8">
 		<title>アカウント登録</title>
 	<style>
-		#row
-	
+		
 	
 	</style>
 	
@@ -25,7 +24,9 @@
 				   	<div class="row">
 						<div id="change_lib" >
 							登録する図書館の市町村:<h2><strong id="pref_name"> </strong></h2>
-							<strong id="registration_library"> ${library.place}</strong>
+							<strong id="test_name">
+							<br>
+							
 							<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 						</div>
 					</div>
@@ -51,7 +52,7 @@
 					</div>
 			
 					<input class="btn waves-effect #d7ccc8 brown lighten-4"
-						   type="submit" value="Sign Up">
+						   type="submit" value="アカウント登録">
 					<p class="red-text darken-2">${error}</p>
 				</form>
 			</div>
@@ -66,9 +67,10 @@
 			//市町村選択時に実行される関数
 			function on_select_city(systemid, pref){
 				systemid_list = systemid;
-				log(systemid_list);
+				
 				//選択市町村の表示
 				console.log(systemid_list);
+				$('#test_name').html(systemid);
 				$('#pref_name').html(pref);
 				
 			}
@@ -83,11 +85,7 @@
 			});
 			
 			//デバッグ用関数
-			function log(text){
-				try{
-					console.log(text);
-				}catch( e ){}
-			}
+			
 		</script>
 		
 	</body>
