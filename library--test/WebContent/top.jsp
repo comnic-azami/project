@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
 -->
 
-<link href="http://calil.jp/public/css/calilapi.css" rel="stylesheet" type="text/css" />
+	<link href="http://calil.jp/public/css/calilapi.css" rel="stylesheet" type="text/css" />
 
 
 	<title>library_test</title>
@@ -16,26 +16,35 @@
 </head>
 <body>
 <div id ="title">
-<h1>図書検索へようこそ!</h1>
+<h2>図書検索へようこそ!<br>
+${account.userName} <p>さん</p></h2>
 </div>
 
 
 <div id="content">
 
-	<!-- 市町村選択 -->
+	<!-- 選択 -->
 	<div id="pref" >
+		登録している図書館: <h2><strong id="pref_name"> ${library.place}</strong></h2>
+		<br>
+		市町村から図書館を選択:
+		
+		<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
+	</div>
+	
+	<div id="change_lib" >
 		登録している図書館の市町村:
-		<strong id="pref_name">茨城県取手市</strong>
-		<span id="lib_select" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">市町村から選ぶ</a>)</span>
+		<strong id="registration_library"> ${library.place}</strong>
+		<span id="library_change" style="font-size: 85%;"> (<a href="javascript:city_selector.showDlg();">図書館変更</a>)</span>
 	</div>
 
 	<!-- ISBNリスト -->
-	<h4>isbn list:</h4>
-
+	<h4>あなたのisbn list:</h4>
+	<!-- ここでデータベースから本のリストを持ってくる -->
 	<select name="" id="isbn_list" size=2>
-		<option value="4047916234" selected>4047916234</option>
-		<option value="4088700104">4088700104</option>
+		<option value="9784403671586" selected>9784403671586</option>
 	</select>
+　　　<!-- ここまでデータベースから本のリストを持ってくる -->
 
 	<!-- 結果の表示 -->
 	<div id="calil_booklist" class="clearfix">
@@ -47,6 +56,8 @@
 </script>
 <script type="text/javascript">
 	//デフォルトの図書館ID(sysytemid)
+	
+	//デフォルトは登録した図書館を表示したい」
 	var systemid_list = ['Tokyo_Setagaya'];
 	//市町村選択時に実行される関数
 	function on_select_city(systemid, pref){
@@ -61,7 +72,7 @@
 	$(function(){
 		//市町村選択ダイアログ
 		city_selector = new CalilCitySelectDlg({
-			'appkey' : 'YOUR_API_KEY',
+			'appkey' : '2bc265ea827cb23b11d1ee80a25ef575',
 			'select_func' : on_select_city
 		});
 		apishow();
@@ -70,6 +81,7 @@
 	});
 	//図書館APIの検索結果の表示
 	function apishow(){
+		
 		var isbn_list = $('#isbn_list').val().split(',');
 		$('#calil_booklist').html('');
 		$(isbn_list).each(function(i, isbn){

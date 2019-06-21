@@ -254,7 +254,7 @@
       } else {
         alert('郵便番号あるいは住所が正しくありません。再度確認してください');
       }
-    　　　});
+    　　　}
     　}
 
 
@@ -332,7 +332,7 @@
         }
       });
     }
-  }]);
+  }])
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
