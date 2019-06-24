@@ -17,7 +17,7 @@
 <body>
 <div id ="title">
 <h2>図書検索へようこそ!<br>
-${account.userName} <p>さん</p></h2>
+<h2>${account.userName}さん</h2>
 </div>
 
 
